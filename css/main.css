@@ -1,5 +1,5 @@
 :root {
-  --main-color: #e91e63;
+  --main-color: #009688;
 }
 html {
   scroll-behavior: smooth;
@@ -21,30 +21,62 @@ body {
     width: 0;
   }
 
-  /* Track */
   ::-webkit-scrollbar-track {
     background: #f1f1f1;
   }
 
-  /* Handle */
   ::-webkit-scrollbar-thumb {
     background: #888;
   }
 
-  /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
 }
 * {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/*! Smartphones */
+@media (max-width: 767px) {
+  .container {
+    max-width: 90%;
+  }
+}
+
+/*! Tablets */
+@media (min-width: 768px) and (max-width: 991px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+/*! Laptop */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+/*! Large Desktops */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
 }
 
 /*TODO Start Setting Box */
 
 .setting-box {
   position: fixed;
-  left: -220px;
+  left: -320px;
   top: 0;
   z-index: 10;
   color: black;
@@ -56,24 +88,26 @@ body {
 }
 .setting-box .icon {
   position: absolute;
-  top: 30%;
+  top: 20%;
   left: 100%;
   padding: 10px;
-  background: #ffffff78;
+  background: var(--main-color);
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
+  transition: 0.3s all ease-in-out;
 }
 .active {
   left: 0;
 }
 .setting-box .settings-container {
-  width: 200px;
+  width: 300px;
 }
 .setting-box .colors {
-  background: #494949;
+  background: #333;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -124,11 +158,12 @@ body {
 .setting-box .random {
   display: flex;
   flex-direction: column;
-  background: #494949;
+  background: #333;
   border-radius: 10px;
   margin-top: 10px;
   text-align: center;
   color: white;
+  padding: 20px 0px;
 }
 .setting-box .random .options {
   display: flex;
@@ -160,6 +195,7 @@ body {
 /*TODO Start Landing Page */
 .landing-page {
   min-height: 100vh;
+  background-image: url(../img/4.jpg);
   background-size: cover;
   position: relative;
   transition: 0.3s all ease-in-out;
@@ -170,37 +206,155 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #00000085;
+  background-color: #000000a6;
   z-index: 1;
 }
-.landing-page .header-area {
-  position: relative;
-  z-index: 2;
+.header-area {
+  position: sticky;
   color: white;
+  z-index: 3;
+  background: black;
+  height: 70px;
+  top: 0;
+}
+
+.header-area .container {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  max-width: 80%;
-  margin: auto;
+  align-items: center;
+  height: 100%;
 }
-.landing-page .header-area .logo {
-  width: 200px;
+.header-area .logo {
+  font-size: 18px;
 }
-.landing-page .header-area ul {
-  width: 80%;
+
+.toggler {
+  font-size: 30px;
+  color: var(--main-color);
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+}
+
+.toggle-icon {
+  display: none;
+}
+
+.header-area ul.main {
   display: flex;
   gap: 20px;
   list-style-type: none;
-  justify-content: end;
+  padding: 0;
+  height: 100%;
 }
-.landing-page .header-area ul li a {
+
+/*! Smartphones */
+@media (max-width: 776px) {
+  .header-area ul.main {
+    display: none;
+  }
+
+  .toggle-icon {
+    display: block;
+  }
+}
+
+.header-area ul.main li a {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.header-area ul li a {
   text-decoration: none;
   color: white;
   transition: 0.25s ease-in-out all;
+  font-size: 18px;
+  position: relative;
 }
-.landing-page .header-area ul li .active,
-.landing-page .header-area ul li a:hover {
+
+.header-area ul.main li a::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 3%;
+  transition: 0.25s ease-in-out all;
+  background-color: white;
+}
+
+.header-area ul.main li a:hover {
   color: var(--main-color);
+}
+
+.header-area ul.main li a:hover::before {
+  width: 100%;
+}
+
+/*! Secondary ul*/
+
+.header-area .menu {
+  border-radius: 20px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  background: #444;
+  width: 80%;
+  height: 400px;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: show 0.5s ease;
+  display: none;
+}
+
+.header-area .menu.show-menu {
+  display: flex;
+}
+
+.header-area .menu ul.secondary {
+  display: flex;
+  gap: 20px;
+  list-style-type: none;
+  border-radius: 20px;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  width: 100%;
+  background: #333;
+  height: 100%;
+  justify-content: center;
+}
+
+.header-area .menu ul.secondary li {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.header-area .menu ul.secondary li a {
+  width: 80%;
+  background-color: #222;
+  display: flex;
+  justify-content: center;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.header-area .menu ul.secondary li a:hover {
+  background-color: var(--main-color);
+  color: white;
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -100px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
 }
 
 .landing-page .introduction-text {
@@ -216,30 +370,30 @@ body {
 .landing-page .introduction-text p {
   font-size: 14px;
   color: #aaa;
+  margin-top: 30px;
+  line-height: 1.5;
 }
 .landing-page .introduction-text h2 span {
   color: var(--main-color);
   transition: 0.3s all ease-in-out;
 }
+
 /*TODO End Landing Page */
 /*TODO Start About Us */
 .about {
-  max-width: 70%;
-  margin: auto;
+  padding: 50px 0px;
+  background: #333;
 }
 .about .parent {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  justify-content: space-between;
+  gap: 60px;
 }
 
 .about .child:first-of-type {
-  max-width: 50%;
   display: flex;
   flex-direction: column;
-  align-items: start;
 }
 
 .about .child h2 {
@@ -248,20 +402,33 @@ body {
 }
 
 .about .child p {
-  color: #888;
+  color: #ddd;
   line-height: 35px;
-  margin-top: -10px;
 }
 
 .about .child img {
-  width: 250px;
+  max-width: 100%;
+  border-radius: 20px;
 }
+
+/*! Smartphones */
+@media (max-width: 767px) {
+  .about .parent {
+    flex-direction: column;
+    gap: 30px;
+
+    & h2 {
+      text-align: center;
+    }
+  }
+}
+
 /*TODO End About Us */
 
 /*TODO Start Skills */
 
 .skills {
-  background-color: #eee;
+  background-color: #222;
   padding: 50px 0;
   text-align: center;
 }
@@ -271,36 +438,34 @@ body {
   transition: 0.3s all ease-in-out;
 }
 
-.skills .container {
+.skills .skills-container {
   display: flex;
   gap: 10px;
   flex-direction: column;
 }
-.skills .container .skill {
-  background-color: white;
+.skills .skills-container .skill {
+  border-radius: 8px;
+  background-color: #666;
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 40px;
   padding: 20px;
-  width: 70%;
-  margin: auto;
   height: 60px;
 }
 
-.skills .container .skill h3 {
-  color: black;
-  width: 100px;
+.skills .skills-container .skill h3 {
+  color: #eee;
+  width: 25%;
+  letter-spacing: 1px;
 }
 
-.skills .container .skill .progress {
+.skills .skills-container .skill .progress {
   position: relative;
   width: 80%;
-  background: #eee;
+  background: #ddd;
   height: 100%;
   border-radius: 5px;
 }
-.skills .container .skill .progress span {
+.skills .skills-container .skill .progress span {
   position: absolute;
   height: 100%;
   width: 0%;
@@ -311,44 +476,49 @@ body {
   transition: 0.5s all ease-in-out;
 }
 
+/*! Smartphones */
+@media (max-width: 767px) {
+  .skills .skills-container .skill {
+    flex-direction: column;
+    height: 80px;
+    gap: 10px;
+  }
+}
+
 /*TODO End Skills */
 /*TODO Start Gallery */
 
 .gallery {
   padding: 50px 0px;
   text-align: center;
-  background-color: white;
+  background-color: #333;
 }
 
 .gallery .title {
   color: var(--main-color);
-  margin-bottom: 3rem;
+  margin-bottom: 20px;
   transition: 0.3s all ease-in-out;
 }
 
-.gallery .container {
+.gallery .images-container {
   display: grid;
   justify-content: center;
-  grid-template-columns: repeat(4, 25%);
-  margin: auto;
-  width: 70%;
-  row-gap: 10px;
+  grid-template-columns: repeat(4, 24%);
+  gap: 15px;
 }
 
-.gallery .container .img {
-  width: 80%;
-  border: 1px solid #ccc;
-  padding: 1px;
+.gallery .images-container .img {
   cursor: pointer;
   transition: 0.3s all ease;
 }
-.gallery .container .img:hover {
-  transform: scale(1.1);
+.gallery .images-container .img:hover {
+  transform: scale(1.05);
 }
 
-.gallery .container .img img {
+.gallery .images-container .img img {
   max-width: 100%;
   height: 100%;
+  border: 2px solid #ccc;
 }
 
 .gallery .overlay {
@@ -367,9 +537,9 @@ body {
   opacity: 1;
 }
 .gallery .overlay .pop-up {
-  background: #494949;
+  background: #222;
   width: 80%;
-  height: 60%;
+  height: 70%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -382,43 +552,63 @@ body {
 }
 .gallery .overlay .pop-up span {
   position: absolute;
-  background: white;
+  background: #ddd;
   border-radius: 50%;
   padding: 5px 12px 5px 12px;
   font-size: 30px;
   top: -20px;
   right: -20px;
   cursor: pointer;
-  font-weight: 700;
+  font-weight: 600;
   color: #dc3545;
   transition: all 0.3s ease-in-out;
 }
 
-.gallery .overlay .pop-up h1 {
+.gallery .overlay .pop-up h2 {
   margin: 0;
   color: var(--main-color);
 }
 .gallery .overlay .pop-up img {
-  max-width: 90%;
   height: 80%;
-  background: black;
-  padding: 10px;
-  border-radius: 10px;
+  border: 3px solid #aaa;
 }
+
+/*! Tablets And Smartphones */
+@media (max-width: 991px) {
+  .gallery .images-container {
+    grid-template-columns: repeat(2, 48%);
+    gap: 10px;
+  }
+}
+
+/*! Laptop */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .gallery .images-container {
+    grid-template-columns: repeat(3, 32%);
+  }
+}
+
 /*TODO End Gallery */
 
 /*TODO Start Timeline */
-.omar {
-  height: 60vh;
+.timeline {
+  height: 70vh;
   overflow: auto;
+  background-color: #222;
+  padding: 50px 0px;
 }
 
-.timeline {
+.timeline h1 {
+  color: var(--main-color);
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.timeline-container {
   position: relative;
-  padding: 50px 0px;
-  background-color: #eee;
+  background-color: #444;
   width: 100%;
-  height: 180vh;
+  height: 100vh;
 }
 
 .timeline .hr {
@@ -440,7 +630,7 @@ body {
   height: 20px;
   width: 20px;
   border-radius: 50%;
-  background: white;
+  background: #000;
   border: 3px solid var(--main-color);
   transition: all 0.3s ease-in-out;
 }
@@ -450,7 +640,7 @@ body {
   width: fit-content;
   padding: 5px;
   border-radius: 3px;
-  color: white;
+  color: #000;
   font-weight: 600;
   position: absolute;
   top: 8%;
@@ -464,7 +654,7 @@ body {
   width: fit-content;
   padding: 5px;
   border-radius: 3px;
-  color: white;
+  color: #000;
   font-weight: 600;
   position: absolute;
   top: 53%;
@@ -476,8 +666,8 @@ body {
 .timeline .box {
   position: absolute;
   width: 40%;
-  background: white;
-  padding: 0px 10px;
+  background: #111;
+  padding: 10px;
   border: 2px solid var(--main-color);
   border-radius: 5px;
   transition: all 0.3s ease-in-out;
@@ -489,24 +679,24 @@ body {
 }
 
 .timeline .box p {
-  color: #666;
+  color: #bbb;
   line-height: 30px;
 }
 
 .timeline .one {
-  top: 13.3%;
+  top: 14%;
   left: 5%;
 }
 .timeline .two {
-  top: 35.8%;
+  top: 36.5%;
   right: 5%;
 }
 .timeline .three {
-  top: 58.3%;
+  top: 59%;
   left: 5%;
 }
 .timeline .four {
-  top: 80.7%;
+  top: 81.5%;
   right: 5%;
 }
 
@@ -528,12 +718,33 @@ body {
   transition: all 0.3s ease-in-out;
 }
 
+/*! Smartphones */
+@media (max-width: 500px) {
+  .timeline-container {
+    height: 200vh;
+  }
+  .timeline :where(.one, .three) {
+    left: 3% !important;
+  }
+  .timeline :where(.two, .four) {
+    right: 3% !important;
+  }
+}
+
+/*! Tablets and Smartphones */
+@media (max-width: 991px) {
+  .timeline .box :where(h3, p) {
+    font-size: 14px;
+  }
+}
+
 /*TODO End Timeline */
 /*TODO Start Features */
 
 .features {
-  padding: 30px 0px;
+  padding: 50px 0px;
   text-align: center;
+  background-color: #333;
 }
 
 .features h1 {
@@ -543,30 +754,16 @@ body {
 
 .features .parent {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  width: 80%;
-  padding: 0px 20px;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
+  row-gap: 15px;
+  justify-content: space-between;
 }
 
 .features .parent .child {
-  margin: 30px 10px;
-  width: calc(33.3% - 20px);
-  position: relative;
-}
-.features .parent .child::after {
-  content: "";
-  position: absolute;
-  height: 0.8%;
-  width: 60%;
-  top: 70%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: var(--main-color);
-  transition: all 0.3s ease-in-out;
+  width: calc(33.3% - 10px);
+  background: #555;
+  padding: 20px;
+  border-radius: 15px;
 }
 
 .features .parent .child img {
@@ -576,20 +773,56 @@ body {
 
 .features .parent .child h4 {
   color: var(--main-color);
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+}
+
+.features .parent .child h4::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 90%;
+  bottom: -40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--main-color);
   transition: all 0.3s ease-in-out;
 }
 
 .features .parent .child p {
-  color: #999;
+  color: #bbb;
 }
+
+/*! Tablets */
+@media (min-width: 768px) and (max-width: 991px) {
+  .features .parent .child {
+    width: calc(50% - 10px);
+  }
+}
+
+/*! Tablets */
+@media (max-width: 767px) {
+  .features .parent .child {
+    width: 90%;
+  }
+  .features .parent {
+    justify-content: center;
+  }
+}
+
 /*TODO End Features */
 /*TODO Start Testimonials */
 .testimonials {
+  height: 60vh;
+  position: relative;
+  padding: 50px 0px;
+  background-color: #222;
+}
+
+.testimonials .container {
+  height: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 75vh;
   position: relative;
 }
 
@@ -602,7 +835,7 @@ body {
 
 .testimonials .left span {
   position: absolute;
-  top: 30%;
+  top: 10%;
   left: 6%;
   color: white;
   font-size: 30px;
@@ -619,17 +852,17 @@ body {
   justify-content: space-around;
   align-items: center;
   position: absolute;
-  top: 40%;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
+  transform: translate(-50%, -50%);
+  width: 100%;
 }
 .testimonials .content .card {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: #555;
   width: calc(33.3% - 20px);
   padding: 10px;
   gap: 15px;
@@ -637,7 +870,7 @@ body {
 }
 
 .testimonials .content .card p {
-  color: #999;
+  color: #bbb;
   margin: 0;
   padding: 0px 5px;
 }
@@ -665,8 +898,8 @@ body {
 }
 
 .testimonials .content .card .info .details h5 {
-  color: #333;
-  margin: 0;
+  color: #ddd;
+  letter-spacing: 1px;
 }
 
 .testimonials .content .card .info .details h6 {
@@ -675,22 +908,46 @@ body {
   transition: all 0.3s ease-in-out;
 }
 
+/*! Tablets And Smartphones */
+@media (max-width: 991px) {
+  .testimonials {
+    height: 100vh;
+  }
+
+  .testimonials .content {
+    top: 60%;
+    flex-direction: column;
+    row-gap: 10px;
+  }
+
+  .testimonials .content .card {
+    width: 90%;
+    gap: 10px;
+  }
+}
+
 /*TODO End Testimonials */
 /*TODO Start Contact Us */
 .contact {
-  background-image: url("../img/contact.png");
-  background-size: cover;
   text-align: center;
-  padding-bottom: 100px;
-  position: relative;
+  padding: 50px 0px;
+  background: #333;
 }
+.contact .container {
+  position: relative;
+  background-image: url(../img/contact.png);
+  background-size: contain;
+  background-position: center;
+  padding: 40px;
+}
+
 .contact .overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #ffffff5c;
+  background-color: #8f8f8f14;
   z-index: 1;
 }
 
@@ -699,18 +956,14 @@ body {
   margin: 40px 0px;
   transition: all 0.3s ease-in-out;
 }
-.contact .container {
-  width: 60%;
-  margin: auto;
+.contact .contact-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 20px;
   position: relative;
-  z-index: 5;
+  z-index: 1;
 }
 
-.contact .container .left {
+.contact .contact-container .left {
   display: flex;
   flex-direction: column;
   height: 200px;
@@ -718,7 +971,7 @@ body {
   width: 50%;
 }
 
-.contact .container .left input[type="text"] {
+.contact .contact-container .left input[type="text"] {
   padding: 10px;
   background-color: rgba(218, 218, 218, 0.19);
   outline: 0;
@@ -726,13 +979,13 @@ body {
   transition: all 0.3s ease-in-out;
 }
 
-.contact .container .left input[type="text"]:focus {
+.contact .contact-container .left input[type="text"]:focus {
   border-color: #aaa var(--main-color) var(--main-color) #aaa;
 }
-.contact .container .left input[type="text"]:focus::placeholder {
+.contact .contact-container .left input[type="text"]:focus::placeholder {
   color: var(--main-color);
 }
-.contact .container .right {
+.contact .contact-container .right {
   display: flex;
   flex-direction: column;
   height: 200px;
@@ -740,16 +993,17 @@ body {
   width: 50%;
 }
 
-.contact .container .right textarea {
+.contact .contact-container .right textarea {
   padding: 10px;
   background-color: rgba(218, 218, 218, 0.19);
   outline: 0;
   border: 2px solid #aaa;
   height: 74%;
   transition: all 0.3s ease-in-out;
+  resize: none;
 }
 
-.contact .container .right textarea:focus {
+.contact .contact-container .right textarea:focus {
   border-color: #aaa var(--main-color) var(--main-color) #aaa;
 }
 
@@ -757,7 +1011,7 @@ textarea:focus::placeholder {
   color: var(--main-color);
 }
 
-.contact .container .right input[type="submit"] {
+.contact .contact-container .right input[type="submit"] {
   background: var(--main-color);
   height: 20%;
   color: white;
@@ -774,7 +1028,7 @@ textarea:focus::placeholder {
   align-items: center;
   width: 100%;
   height: 50px;
-  background-color: #333;
+  background-color: #000;
 }
 
 .footer h5 {
@@ -787,3 +1041,10 @@ textarea:focus::placeholder {
 }
 
 /*TODO End Footer */
+
+/*! Smartphones */
+@media (max-width: 767px) {
+  html {
+    font-size: 80% !important;
+  }
+}
