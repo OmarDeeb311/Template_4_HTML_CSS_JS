@@ -647,7 +647,7 @@ body {
 
 .timeline .date-1 {
   background: var(--main-color);
-  width: 200px;
+  width: fit-content;
   padding: 5px;
   color: #000;
   font-weight: 600;
@@ -661,7 +661,7 @@ body {
 
 .timeline .date-2 {
   background: var(--main-color);
-  width: 200px;
+  width: fit-content;
   padding: 5px;
   color: #000;
   font-weight: 600;
